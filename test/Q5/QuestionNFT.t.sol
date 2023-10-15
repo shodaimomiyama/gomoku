@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import "forge-std/Test.sol";
+import "forge-std/Test.sol";  //Forge標準ライブラリをゲット(vmはその中)
 import { AnswerNFT } from "src/A5/AnswerNFT.sol";
 import { SAnswerNFT } from "src/A5/interfaces/SAnswerNFT.sol";
-import { YourNFT } from "src/A5/utils/YourNFT.sol";
+import { YourNFT } from "src/A5/utils/YourNFT.sol";  //nft (YourNFTcontruct型変数)で使うからimport:やっぱ別で作っとくのがよし？（１つのフォルダには１つのコントラクト？）
 
 contract QuestionNFT is Test, SAnswerNFT { 
     AnswerNFT yourContract;
@@ -28,7 +28,6 @@ contract QuestionNFT is Test, SAnswerNFT {
             unchecked { ++i; }
         }
         //uncheckedってなんで使うの？
-
         //0.8.0 からは、アンダフロー・オーバーフローが発生した場合 revert になる という動きがデフォルトになります。その動きにしたくなければ、 unchecked を使ってください
 
         yourContract.setNFT(address(nft));
@@ -53,7 +52,10 @@ contract QuestionNFT is Test, SAnswerNFT {
         assertTrue(vars.canEnter);
 
         vm.prank(vars.bob.addr);
-        vm.expectRevert(abi.encodePacked("You don't have the first NFT."));
+        //vm.expectRevert(abi.encodePacked("You don't have the first NFT."));
+        vm.expectRevert("You don't have the first NFT.");
+        //expectRevert：オーバーロードされている関数
         yourContract.canEnterByOriginHolder();
     }
 }
+

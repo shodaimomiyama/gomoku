@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import { SAnswerGomoku } from "./SAnswerGomoku.sol";
-import { IAnswerGomoku } from "./IAnswerGomoku.sol";
+import { SGomoku } from "./SGomoku.sol";
+import { IGomoku } from "./IGomoku.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 
-contract GomokuV1 is SAnswerGomoku {
+contract GomokuV1 is SGomoku {
 
     //event LogAddresses(address indexed sender, address indexed userAddr);
 

@@ -5,11 +5,11 @@ import "../../lib/forge-std/src/Test.sol";
 import { ItestGomoku } from "./interface/ItestGomoku.sol";
 import { GomokuV1 } from "../../Gomoku/GomokuV1.sol";
 import { GameV1 } from "../../Gomoku/GameV1.sol";
-import { IAnswerGomoku } from "../../Gomoku/IAnswerGomoku.sol";
-import { SAnswerGomoku } from "../../Gomoku/SAnswerGomoku.sol";
+import { IGomoku } from "../../Gomoku/IGomoku.sol";
+import { SGomoku } from "../../Gomoku/SGomoku.sol";
 
 
-contract testGomoku is Test, ItestGomoku, SAnswerGomoku {
+contract testGomoku is Test, ItestGomoku, SGomoku {
 
     GomokuV1 gomoku;
     GameV1 game;
@@ -51,7 +51,7 @@ contract testGomoku is Test, ItestGomoku, SAnswerGomoku {
         gomoku.openGame(testusers.alice);
         uint[] memory lsgames_array = gomoku.listGame(); //return uint[] _gid;
         vm.prank(testusers.bob.addr);
-        uint256 gid = gomoku.joinGame(testusers.bob); //bobが_gidをゲット
+        uint256 gid = gomoku.joinGame(testusers.bob); //fn joinGameがしたいこと→gidをゲットし、
         address player2 = game.getPlayer2(gid); //player2にbobがエントリー Bobの_gidとAliceの_gidが同じだったら
 
         /*3.assertion*/

@@ -1,13 +1,13 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import { SAnswerGomoku } from "./SAnswerGomoku.sol";
-import { IAnswerGomoku } from "./IAnswerGomoku.sol";
+import { SGomoku } from "./SGomoku.sol";
+import { IGomoku } from "./IGomoku.sol";
 import { GomokuV1 } from "./GomokuV1.sol";
 
 //親クラスから子クラスへの継承は、子クラスが親クラスの機能や変数を継承するという意味での"一方通行"です。逆に、親クラスが子クラスの特定の機能や変数を直接使用することはできません。しかし、子クラスは親クラスの機能や変数にアクセスできます。
 //もしGameV1はGomokuV1を継承すると、同時にGomokuV1のインスタンスも持つことになる。これは混乱の原因となります。継承を使っているのであれば、新しいインスタンスを作成するのではなく、GameV1自体がGomokuV1の機能を持っていると考える方が自然です。解決策として、不要な継承やインスタンスの作成を避けるようにコードを整理することをおすすめします。
-contract GameV1 is SAnswerGomoku {
+contract GameV1 is SGomoku {
 
     GomokuV1 public gomoku;
 

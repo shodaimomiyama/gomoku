@@ -9,7 +9,8 @@ contract YourNFT is ERC721, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    constructor() ERC721("YourNFT", "YNFT") {}
+    constructor() ERC721("YourNFT", "YNFT") {} //constructorをちゃんと学ぶ！
+    //名前とシンボル
 
     function mintItem(address to)
         public

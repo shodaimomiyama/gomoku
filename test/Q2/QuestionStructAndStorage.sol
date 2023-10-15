@@ -9,12 +9,12 @@ import {SAnswerStructAndStorage} from "src/A2/interfaces/SAnswerStructAndStorage
 contract  QuestionStructAndStorage is Test, SAnswerStructAndStorage {
     using stdStorage for StdStorage;
 
+
     //ジェネリクスとは、「総称性（Genericity）」「ジェネリック・プログラミング」とも呼ばれるプログラミング技法で、 オブジェクト指向とは異なるパラダイムからきたものです。 データの型に束縛されず、型そのものをパラメータ化して扱うことができます。
     //using A for B; という指示はライブラリのファンクション（ A というライブラリから）をどんな型(B)にも加えるのに使うことができます。 このファンクションは最初のパラメータとして（Pythonの self の様に）、そのファンクションを呼び出したオブジェクトを受け取ります。
     //DRY(Don't Repeat Yourself:同じことを繰り返すな)原則は、非常に重要なものです。これは、1つのシステムの中で同じものが重複することがあってはならないという原則です。言い換えれば、1つの知識に対応する実装は必ず1つにする、ということです。
     AnswerStructAndStorage structAndStorage; //型（クラス型）、変数
     //変数とはデータを格納しておく領域のことです。変数は通常メモリ上に確保され、値を代入したり参照したりすることができます。それぞれの領域を区別するために変数名を付けて宣言します。また型とは、数字や文字などのデータをメモリ上に確保する領域やバイト長、確保した領域の扱い方などを指定するものです。
-
 
 
     struct Test2Vars {
