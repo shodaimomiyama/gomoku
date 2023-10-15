@@ -14,7 +14,7 @@ contract GomokuV1 is SGomoku {
 
     uint256 public _gid = 0; //まず基準のgidを定義==0
     mapping(uint256 _gid => Users) public _games; //keyが_gidでvalueがUsers(struct)
-    uint[] lsgames_array; //結局mappingにしてbobの_gidとaddressを結びつけた方がいい？
+    //uint[] lsgames_array; //結局mappingにしてbobの_gidとaddressを結びつけた方がいい？
     Users public lastArgument; //変数の型がstructの場合は作った構造体の名前を宣言すれば良い
 
     function openGame(Users memory user) public returns(uint256) {
@@ -22,7 +22,12 @@ contract GomokuV1 is SGomoku {
         require(msg.sender == user.addr, "Your address is wrong."); //現在の関数を呼び出しているアドレスと引数のaddressが同じであることが前提
         _gid++; //ゲームIDをインクリメント
 
-        lsgames_array.push(_gid); //_gidリスト（配列）に新しくできた_gidを追加
+        //lsgames_array.push(_gid); //_gidリスト（配列）に新しくできた_gidを追加
+        /*
+        gidは単なるインクリメントした数値なのだから、1から最新のgidまでの数字一つ一つがgame listになる。
+        だからわざわざ保存する必要がない(NFTのtokenIdと同じ作り)
+        by 落合先生
+        */
 
         Users memory newGame; //Users struct型を持つ新しい変数newGame　これはゲーム用の変数として使うことにする
         newGame.addr = msg.sender;  //現在の関数を呼び出しているアドレスをUsers(struct型)の変数newGameのaddressに代入(msg.senderからUsersstructのaddressを作っちゃっている)
@@ -45,20 +50,25 @@ contract GomokuV1 is SGomoku {
         return _gid;
     }
 
-    function listGame() public view returns(uint[] memory ) {
+    /*function listGame() public view returns(uint[] memory ) {
         return lsgames_array;
     }
+    */
 
-    function joinGame(Users memory user) public returns(uint256) {
+    function joinGame(Users memory user, uint targetGid) public returns(bool) {
 
         //emit LogAddresses(msg.sender, user.addr);
-        require(lsgames_array.length > 0, "No games available to join");
+        //require(lsgames_array.length > 0, "No games available to join");
         require(msg.sender == user.addr, "Your address is wrong.");
-
         lastArgument = user;
-        uint256 _gid = lsgames_array[lsgames_array.length - 1];
+        //uint256 _gid = lsgames_array[lsgames_array.length - 1];
+
+        /*
+        fn joinGame(uint targedGId) にしてどのゲームに参加するか指定しないとだめ。
+        あとは、msg.sendersを用いてストレージに予め保存したusersを取り出して使えばいい
+        */
         
-        return _gid;
+        return true;
     }
 
 

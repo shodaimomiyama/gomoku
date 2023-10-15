@@ -9,7 +9,7 @@ import { IGomoku } from "../../Gomoku/IGomoku.sol";
 import { SGomoku } from "../../Gomoku/SGomoku.sol";
 
 
-contract testGomoku is Test, ItestGomoku, SGomoku {
+contract testGomoku is Test, ItestGomoku, SGomoku, GomokuV1 {
 
     GomokuV1 gomoku;
     GameV1 game;
@@ -42,21 +42,21 @@ contract testGomoku is Test, ItestGomoku, SGomoku {
 
         /*1.asomokunation*/
         TestUsers memory testusers;
+        GameSetting memory gamesetting;
         testusers.alice.addr = makeAddr("Alice");
         testusers.bob.addr = makeAddr("Bob");
 
         /*2.execution*/
-        //vm.prank(testusers.bob.addr);
         vm.prank(testusers.alice.addr);
         gomoku.openGame(testusers.alice);
-        uint[] memory lsgames_array = gomoku.listGame(); //return uint[] _gid;
+        //uint[] memory lsgames_array = gomoku.listGame(); //return uint[] _gid;
         vm.prank(testusers.bob.addr);
-        uint256 gid = gomoku.joinGame(testusers.bob); //fn joinGameがしたいこと→gidをゲットし、
-        address player2 = game.getPlayer2(gid); //player2にbobがエントリー Bobの_gidとAliceの_gidが同じだったら
+        gamesetting.canJoin = gomoku.joinGame(testusers.bob, 1); //fn joinGameがしたいこと→gidをゲットし、 //bool型で定義できない
+        address player2 = game.getPlayer2(_gid); //player2にbobがエントリー Bobの_gidとAliceの_gidが同じだったら
 
         /*3.assertion*/
+        assertTrue(gamesetting.canJoin);
         assert(player2 == testusers.bob.addr);
-
     }
 
     function testStartGame() public {
@@ -74,12 +74,11 @@ contract testGomoku is Test, ItestGomoku, SGomoku {
         vm.prank(testusers.alice.addr);
         gid = gomoku.openGame(testusers.alice); //新しいgidを生成
         address player1 = game.getPlayer1(gid);
-        uint[] memory lsgames_array = gomoku.listGame(); //return uint[] _gid;
+        //uint[] memory lsgames_array = gomoku.listGame(); //return uint[] _gid;
 
         vm.prank(testusers.bob.addr);
-        gid = gomoku.joinGame(testusers.bob); //bobが_gidをゲット
-        address player2 = game.getPlayer2(gid); //player2にbobがエントリー Bobの_gidとAliceの_gidが同じだったら
-
+        gamesetting.canJoin = gomoku.joinGame(testusers.bob, 1); //fn joinGameがしたいこと→gidをゲットし、 //bool型で定義できない
+        address player2 = game.getPlayer2(_gid);
 
         /*2.execution*/
         gamesetting.canStart = game.startGame(player1);

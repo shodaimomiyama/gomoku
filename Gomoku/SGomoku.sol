@@ -13,6 +13,7 @@ interface SGomoku {
     struct GameSetting {
         uint[15][15] grid;
         uint256 gid;
+        bool canJoin;
         bool canStart;
         bool canContinue;
         bool canEnd;

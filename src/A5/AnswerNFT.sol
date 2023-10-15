@@ -44,7 +44,7 @@ contract AnswerNFT is IAnswerNFT, Ownable {
      */
     function canEnterByOriginHolder() public override view returns (bool) {
         // 1番目のNFTの現在の所有者が呼び出し元であるかどうかを確認
-        require (nft.ownerOf(1) == msg.sender, "You don't have the first NFT.");
+        require (nft.ownerOf(1) == msg.sender, "You don't have the first NFT."); //ownerOf(1)で特定のtokenIDを持つNFTを取り出せる
         return true;
         // Note: Fill me
         //ownerOf(1)とかあり？？

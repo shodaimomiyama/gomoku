@@ -10,7 +10,7 @@ interface IGomoku {
     function games() external returns(address, uint256, uint256, uint256);
     function getGameLen() external;
     function listGame() external;
-    function joinGame() external;
+    function joinGame(uint targetGid) external;
 
 //GameV1
     function getPlayer1() external;

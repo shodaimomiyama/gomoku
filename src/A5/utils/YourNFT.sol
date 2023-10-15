@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract YourNFT is ERC721, Ownable {
-    using Counters for Counters.Counter;
+    using Counters for Counters.Counter; //ライブラリは指定したデータ型に対して、ライブラリで定義したメソッドを追加することができます。
     Counters.Counter private _tokenIds;
 
     constructor() ERC721("YourNFT", "YNFT") {} //constructorをちゃんと学ぶ！

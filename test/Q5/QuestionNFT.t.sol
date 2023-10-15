@@ -12,13 +12,14 @@ contract QuestionNFT is Test, SAnswerNFT {
 
     function setUp() public {
         yourContract = new AnswerNFT();
-        yourContractAddress = address(yourContract);
+        yourContractAddress = address(yourContract); //デプロイされたAnswerNFTコントラクトのEthereumアドレスを取得
     }
     
     /**
         Q-5. ERC-721とapprovalとプログラマブルな送金と多様なコントラクト
         ガチャガチャを通して、ERC-721の内容とコントラクトへの送金を学ぶ
      */
+     
     function test_Q5_NFT() public {
         Vars memory vars;
 
